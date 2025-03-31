@@ -3,14 +3,14 @@ import Image from 'astro/components/Image.astro'
 import ChevronDownIcon from '../components/icons/ChevronDownIcon.astro'
 
 const menuItems = [
-	{ label: 'Inicio', href: '/home/#inicio', disabled: false },
+	{ label: 'Inicio', href: '/#inicio', disabled: false }, // Correct path for Inicio
 	{
 		label: 'Nosotros',
 		disabled: false,
 		dropdown: [
 			{
 				label: 'Acerca de nosotros',
-				href: '/about-us/#nosotros',
+				href: '/about-us/nosotros', // Correct path for "Nosotros" page
 				disabled: false,
 			},
 		],
@@ -19,12 +19,12 @@ const menuItems = [
 		label: 'Préstamos',
 		disabled: false,
 		dropdown: [
-			{ label: 'Personales', href: '#', disabled: false },
+			{ label: 'Personales', href: '/home/prestamos', disabled: false }, // Correct path for "Prestamos"
 			{ label: 'Comerciales (pronto)', href: '#', disabled: true },
 			{ label: 'Hipotecarios (pronto)', href: '#', disabled: true },
 		],
 	},
-	{ label: 'Contactos', href: '/home/#contactos', disabled: false },
+	{ label: 'Contactos', href: '/#contactos', disabled: false }, // Correct path for Contactos
 ]
 ---
 
