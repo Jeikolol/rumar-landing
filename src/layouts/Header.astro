@@ -3,14 +3,14 @@ import Image from 'astro/components/Image.astro'
 import ChevronDownIcon from '../components/icons/ChevronDownIcon.astro'
 
 const menuItems = [
-	{ label: 'Inicio', href: '/home/inicio', disabled: false }, // Correct path for Inicio
+	{ label: 'Inicio', href: '/home/inicio', disabled: false },
 	{
 		label: 'Nosotros',
 		disabled: false,
 		dropdown: [
 			{
 				label: 'Acerca de nosotros',
-				href: '/about-us/nosotros', // Correct path for "Nosotros" page
+				href: '/about-us/nosotros',
 				disabled: false,
 			},
 		],
@@ -250,10 +250,10 @@ const menuItems = [
 		const href = link.getAttribute('href')
 		if (!href) return
 
-		// Extract the page and section from the href
+		// Extract the page and anchor from the href
 		const pathParts = href.split('/')
 		const page = pathParts[1] // Get the base page name (e.g., "home" or "about-us")
-		const sectionOrSubpage = pathParts[2] // Get the section or subpage name (e.g., "inicio" or "nosotros")
+		const anchor = pathParts[2] // Get the section name (e.g., "nosotros")
 
 		// Check if the base page is in the allowed pages array
 		if (pages.includes(page)) {
@@ -263,18 +263,18 @@ const menuItems = [
 			const currentPage = window.location.pathname.split('/')[1]
 
 			if (currentPage === page) {
-				// If already on the same page, scroll to the section or handle subpage
-				if (sectionOrSubpage) {
-					scrollToSection(sectionOrSubpage)
+				// If already on the same page, scroll to the anchor
+				if (anchor) {
+					scrollToSection(anchor)
 				}
 			} else {
-				// If navigating to a different page, store the section or subpage in localStorage
-				if (sectionOrSubpage) {
-					localStorage.setItem('scrollToSection', sectionOrSubpage)
+				// If navigating to a different page, store the anchor in localStorage
+				if (anchor) {
+					localStorage.setItem('scrollToSection', anchor)
 				}
 
-				// Redirect to the base page or subpage
-				window.location.href = `/${page}${sectionOrSubpage ? `/${sectionOrSubpage}` : ''}`
+				// Redirect to the base page
+				window.location.href = `/${page}`
 			}
 		}
 	}
