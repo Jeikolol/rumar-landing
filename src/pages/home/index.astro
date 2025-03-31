@@ -1,0 +1,35 @@
+---
+import Header from '../../layouts/Header.astro'
+import Layout from '../../layouts/Layout.astro'
+import '../../styles/global.css'
+import Contactos from './Contactos.astro'
+import Inicio from './Inicio.astro'
+import Nuestros from './Nuestros.astro'
+import Prestamos from './Prestamos.astro'
+// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
+// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+---
+
+<Layout title="Préstamos Personales y Comerciales | Tu Compañía de Confianza">
+	<Header />
+	<main>
+		<section id="inicio">
+			<Inicio />
+		</section>
+		<section
+			id="prestamos"
+			class="py-12 bg-gray-50">
+			<Prestamos />
+		</section>
+		<section
+			id="nuestros"
+			class="py-12 bg-white">
+			<Nuestros />
+		</section>
+		<section
+			id="contactos"
+			class="bg-gray-50 py-12">
+			<Contactos />
+		</section>
+	</main>
+</Layout>
