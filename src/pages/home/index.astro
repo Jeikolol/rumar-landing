@@ -5,6 +5,7 @@ import Contactos from './Contactos.astro'
 import Inicio from './Inicio.astro'
 import Nuestros from './Nuestros.astro'
 import Prestamos from './Prestamos.astro'
+
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
@@ -12,7 +13,9 @@ import Prestamos from './Prestamos.astro'
 <Layout title="Préstamos Personales y Comerciales | Tu Compañía de Confianza">
 	<Header />
 	<main>
-		<section id="inicio">
+		<section
+			id="inicio"
+			class="relative bg-white pt-24">
 			<Inicio />
 		</section>
 		<section

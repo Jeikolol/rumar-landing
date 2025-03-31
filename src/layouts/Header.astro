@@ -3,7 +3,7 @@ import Image from 'astro/components/Image.astro'
 import ChevronDownIcon from '../components/icons/ChevronDownIcon.astro'
 
 const menuItems = [
-	{ label: 'Inicio', href: '/#inicio', disabled: false }, // Correct path for Inicio
+	{ label: 'Inicio', href: '/home/inicio', disabled: false }, // Correct path for Inicio
 	{
 		label: 'Nosotros',
 		disabled: false,
@@ -24,7 +24,7 @@ const menuItems = [
 			{ label: 'Hipotecarios (pronto)', href: '#', disabled: true },
 		],
 	},
-	{ label: 'Contactos', href: '/#contactos', disabled: false }, // Correct path for Contactos
+	{ label: 'Contactos', href: '/home/contactos', disabled: false }, // Correct path for Contactos
 ]
 ---
 
@@ -239,27 +239,65 @@ const menuItems = [
 		})
 	})
 
-	// Function to handle in-page navigation
-	function handleInPageNavigation(event: Event, href: string): void {
-		if (href.startsWith('#')) {
-			event.preventDefault()
-			const targetElement = document.querySelector(href)
-			if (targetElement) {
-				targetElement.scrollIntoView({ behavior: 'smooth' })
+	// Array of pages to check
+	const pages: string[] = ['home', 'about-us']
+
+	// Function to handle navigation dynamically
+	function handleNavigation(event: Event): void {
+		const link = (event.target as HTMLElement).closest('a') // Ensure the clicked element is a link
+		if (!link) return
+
+		const href = link.getAttribute('href')
+		if (!href) return
+
+		// Extract the page and section from the href
+		const pathParts = href.split('/')
+		const page = pathParts[1] // Get the page name (e.g., "home")
+		const section = pathParts[2] // Get the section name (e.g., "inicio")
+
+		// Check if the page is in the allowed pages array
+		if (pages.includes(page)) {
+			event.preventDefault() // Prevent default navigation
+
+			if (page) {
+				localStorage.setItem('page', page)
 			}
+
+			// Store the section in localStorage to access it after redirection
+			if (section) {
+				localStorage.setItem('scrollToSection', section)
+			}
+
+			const lastPage = localStorage.getItem('page')
+			if (lastPage && lastPage !== page) {
+				// Redirect to the page
+				window.location.href = `/${page}`
+			}
+
+			scrollToSection()
 		}
 	}
 
-	// Attach event listeners to menu items
+	// Function to scroll to the section after the page loads
+	function scrollToSection(): void {
+		const section = localStorage.getItem('scrollToSection')
+		if (section) {
+			const targetElement = document.querySelector(`#${section}`)
+			if (targetElement) {
+				targetElement.scrollIntoView({ behavior: 'smooth' })
+			}
+			// Clear the stored section after scrolling
+			localStorage.removeItem('scrollToSection')
+		}
+	}
+
+	// Attach event listener to all links
 	document.addEventListener('DOMContentLoaded', () => {
-		const menuLinks = document.querySelectorAll('a[href^="#"]')
-		menuLinks.forEach((link) => {
-			link.addEventListener('click', (event) => {
-				const href = (link as HTMLAnchorElement).getAttribute('href')
-				if (href) {
-					handleInPageNavigation(event, href)
-				}
-			})
+		const links = document.querySelectorAll<HTMLAnchorElement>('a')
+		links.forEach((link) => {
+			link.addEventListener('click', handleNavigation)
 		})
+
+		scrollToSection()
 	})
 </script>
