@@ -4,27 +4,27 @@ import ChevronDownIcon from '../components/icons/ChevronDownIcon.astro'
 
 const menuItems = [
 	{ label: 'Inicio', href: '/home/inicio', disabled: false }, // Correct path for Inicio
-	{
-		label: 'Nosotros',
-		disabled: false,
-		dropdown: [
-			{
-				label: 'Acerca de nosotros',
-				href: '/about-us/nosotros', // Correct path for "Nosotros" page
-				disabled: false,
-			},
-		],
-	},
+	// {
+	// 	label: 'Nosotros',
+	// 	disabled: false,
+	// 	dropdown: [
+	// 		{
+	// 			label: 'Acerca de nosotros',
+	// 			href: '/about-us/nosotros', // Correct path for "Nosotros" page
+	// 			disabled: false,
+	// 		},
+	// 	],
+	// },
 	{
 		label: 'Préstamos',
 		disabled: false,
 		dropdown: [
-			{ label: 'Personales', href: '/home/prestamos', disabled: false }, // Correct path for "Prestamos"
-			{ label: 'Comerciales (pronto)', href: '#', disabled: true },
-			{ label: 'Hipotecarios (pronto)', href: '#', disabled: true },
+			{ label: 'Personales', href: '/home/prestamos', disabled: false },
+			{ label: 'Comerciales (pronto)', href: '/', disabled: true },
+			{ label: 'Hipotecarios (pronto)', href: '/', disabled: true },
 		],
 	},
-	{ label: 'Contactos', href: '/home/contactos', disabled: false }, // Correct path for Contactos
+	{ label: 'Contactos', href: '/home/contactos', disabled: false },
 ]
 ---
 
@@ -239,7 +239,7 @@ const menuItems = [
 		})
 	})
 
-	// Array of pages to check
+	// Array of base pages to check
 	const pages: string[] = ['home', 'about-us']
 
 	// Function to handle navigation dynamically
@@ -252,40 +252,48 @@ const menuItems = [
 
 		// Extract the page and section from the href
 		const pathParts = href.split('/')
-		const page = pathParts[1] // Get the page name (e.g., "home")
-		const section = pathParts[2] // Get the section name (e.g., "inicio")
+		const page = pathParts[1] // Get the base page name (e.g., "home" or "about-us")
+		const sectionOrSubpage = pathParts[2] // Get the section or subpage name (e.g., "inicio" or "nosotros")
 
-		// Check if the page is in the allowed pages array
+		// Check if the base page is in the allowed pages array
 		if (pages.includes(page)) {
 			event.preventDefault() // Prevent default navigation
 
-			if (page) {
-				localStorage.setItem('page', page)
-			}
+			// Get the current page from the URL
+			const currentPage = window.location.pathname.split('/')[1]
 
-			// Store the section in localStorage to access it after redirection
-			if (section) {
-				localStorage.setItem('scrollToSection', section)
-			}
+			if (currentPage === page) {
+				// If already on the same page, scroll to the section or handle subpage
+				if (sectionOrSubpage) {
+					scrollToSection(sectionOrSubpage)
+				}
+			} else {
+				// If navigating to a different page, store the section or subpage in localStorage
+				if (sectionOrSubpage) {
+					localStorage.setItem('scrollToSection', sectionOrSubpage)
+				}
 
-			const lastPage = localStorage.getItem('page')
-			if (lastPage && lastPage !== page) {
-				// Redirect to the page
-				window.location.href = `/${page}`
+				// Redirect to the base page or subpage
+				window.location.href = `/${page}${sectionOrSubpage ? `/${sectionOrSubpage}` : ''}`
 			}
-
-			scrollToSection()
 		}
 	}
 
-	// Function to scroll to the section after the page loads
-	function scrollToSection(): void {
-		const section = localStorage.getItem('scrollToSection')
+	// Function to scroll to the section
+	function scrollToSection(section: string | null): void {
 		if (section) {
 			const targetElement = document.querySelector(`#${section}`)
 			if (targetElement) {
 				targetElement.scrollIntoView({ behavior: 'smooth' })
 			}
+		}
+	}
+
+	// Function to scroll to the section after the page loads
+	function scrollToSectionOnLoad(): void {
+		const section = localStorage.getItem('scrollToSection')
+		if (section) {
+			scrollToSection(section)
 			// Clear the stored section after scrolling
 			localStorage.removeItem('scrollToSection')
 		}
@@ -298,6 +306,7 @@ const menuItems = [
 			link.addEventListener('click', handleNavigation)
 		})
 
-		scrollToSection()
+		// Scroll to the section if applicable
+		scrollToSectionOnLoad()
 	})
 </script>
