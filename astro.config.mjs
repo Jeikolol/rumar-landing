@@ -11,6 +11,6 @@ export default defineConfig({
 	vite: {
 		plugins: [tailwindcss()],
 	},
-	output: 'server', // Change to 'static' if you're using static deployment
+	output: 'static', // Change to 'static' if you're using static deployment
 	adapter: vercel(), // Use 'vercel/static' for static sites
 })
