@@ -1,8 +1,17 @@
 ---
+// Import necessary components
 import Image from 'astro/components/Image.astro'
 import ChevronDownIcon from '../components/icons/ChevronDownIcon.astro'
 
-const menuItems = [
+interface MenuItem {
+	label: string
+	href?: string
+	disabled: boolean
+	dropdown?: MenuItem[]
+}
+
+// Menu items
+const menuItems: MenuItem[] = [
 	{ label: 'Inicio', href: '/home/inicio', disabled: false },
 	{
 		label: 'Nosotros',
@@ -28,215 +37,333 @@ const menuItems = [
 ]
 ---
 
-<header class="fixed inset-x-0 top-0 z-50 bg-white shadow-md">
-	<nav
-		class="flex items-center justify-between p-6 lg:px-8"
-		aria-label="Global">
-		<!-- Logo -->
-		<div class="flex lg:flex-1">
-			<a
-				href="#inicio"
-				class="-m-1.5 p-1.5">
-				<span class="sr-only">Rumar Crédito</span>
-				<Image
-					src={'https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600'}
-					alt="Logo"
-					height={32}
-					width={32}
-				/>
-			</a>
-		</div>
-
-		<!-- Mobile Menu Button -->
-		<div class="flex lg:hidden">
-			<button
-				id="mobile-menu-button"
-				type="button"
-				class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
-				<span class="sr-only">Open main menu</span>
-				<svg
-					class="h-6 w-6"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke-width="1.5"
-					stroke="currentColor"
-					aria-hidden="true">
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-					></path>
-				</svg>
-			</button>
-		</div>
-
-		<!-- Mobile Menu -->
-		<div
-			id="mobile-menu"
-			class="hidden lg:hidden fixed inset-0 z-50 bg-white p-6 overflow-y-auto">
-			<div class="flex items-center justify-between">
+<div class="fixed inset-x-0 top-0 z-50 mx-4 mt-4">
+	<header class="bg-white/80 backdrop-blur-md shadow-md rounded-full">
+		<nav
+			class="flex items-center justify-between p-4 lg:px-8"
+			aria-label="Global">
+			<!-- Logo -->
+			<div class="flex lg:flex-1">
 				<a
-					href="#inicio"
+					href="/"
 					class="-m-1.5 p-1.5">
-					<span class="sr-only">Rumar Crédito</span>
-					<img
-						class="h-8 w-auto"
+					<span class="sr-only">Your Company</span>
+					<Image
 						src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
 						alt="Logo"
+						height={32}
+						width={32}
 					/>
 				</a>
+			</div>
+
+			<!-- Mobile menu button -->
+			<div class="flex lg:hidden">
 				<button
-					id="close-mobile-menu-button"
 					type="button"
-					class="-m-2.5 rounded-md p-2.5 text-gray-700">
-					<span class="sr-only">Close menu</span>
+					id="mobile-menu-button"
+					class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
+					<span class="sr-only">Open main menu</span>
 					<svg
-						class="h-6 w-6"
+						class="size-6"
 						fill="none"
 						viewBox="0 0 24 24"
 						stroke-width="1.5"
 						stroke="currentColor"
-						aria-hidden="true">
+						aria-hidden="true"
+						data-slot="icon">
 						<path
 							stroke-linecap="round"
 							stroke-linejoin="round"
-							d="M6 18L18 6M6 6l12 12"
+							d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
 						></path>
 					</svg>
 				</button>
 			</div>
-			<div class="mt-6 space-y-6">
+
+			<!-- Desktop menu -->
+			<div class="hidden lg:flex lg:gap-x-12">
 				{
 					menuItems.map((item) =>
-						item.dropdown ? (
-							<div>
-								<p class="text-sm font-semibold text-gray-900">{item.label}</p>
-								<div class="ml-4 space-y-1">
-									{item.dropdown.map((subItem) => (
-										<a
-											href={subItem.href}
-											class={`block text-sm text-gray-700 hover:bg-gray-100 ${
-												subItem.disabled ? 'opacity-50 pointer-events-none' : ''
-											}`}>
-											{subItem.label}
-										</a>
-									))}
-								</div>
-							</div>
-						) : (
+						'href' in item ? (
 							<a
 								href={item.href}
-								class={`block text-sm font-semibold text-gray-900 hover:bg-gray-50 ${
+								class={`text-sm font-semibold text-gray-900 hover:text-blue-600 ${
 									item.disabled ? 'opacity-50 pointer-events-none' : ''
 								}`}>
 								{item.label}
 							</a>
+						) : (
+							<div class="relative">
+								<button
+									type="button"
+									class="text-sm font-semibold text-gray-900 flex items-center dropdown-button"
+									data-dropdown={`dropdown-${item.label.toLowerCase()}`}>
+									{item.label}
+									<ChevronDownIcon />
+								</button>
+								<div
+									id={`dropdown-${item.label.toLowerCase()}`}
+									class="hidden absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white ring-1 shadow-lg ring-black/5"
+									role="menu"
+									aria-orientation="vertical"
+									tabindex="-1">
+									<div
+										class="py-1"
+										role="none">
+										{item.dropdown?.map((subItem) => (
+											<a
+												href={subItem.href}
+												class={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ${
+													subItem.disabled
+														? 'opacity-50 pointer-events-none'
+														: ''
+												}`}>
+												{subItem.label}
+											</a>
+										))}
+									</div>
+								</div>
+							</div>
 						),
 					)
 				}
 			</div>
-		</div>
+		</nav>
+	</header>
 
-		<!-- Desktop Menu -->
-		<div class="hidden lg:flex lg:gap-x-12">
-			{
-				menuItems.map((item) =>
-					item.dropdown ? (
-						<div
-							class="relative group"
-							id={`dropdown-${item.label}`}>
-							<button
-								class="text-sm font-semibold text-gray-900 flex items-center hover:text-blue-600 dropdown-button"
-								data-label={item.label}>
-								{item.label}
-								<ChevronDownIcon />
-							</button>
-							<div
-								id={`dropdown-menu-${item.label}`}
-								class="absolute right-0 mt-2 hidden w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5">
-								<div class="py-1">
-									{item.dropdown.map((subItem) => (
-										<a
-											href={subItem.href}
-											class={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ${
-												subItem.disabled ? 'opacity-50 pointer-events-none' : ''
-											}`}>
-											{subItem.label}
-										</a>
-									))}
+	<!-- Mobile menu backdrop -->
+	<div
+		id="mobile-menu-backdrop"
+		class="hidden lg:hidden fixed inset-0 z-50 bg-gray-900/50">
+	</div>
+
+	<!-- Mobile menu -->
+	<div
+		id="mobile-menu"
+		class="hidden lg:hidden fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+		<div class="flex items-center justify-between">
+			<a
+				href="#"
+				class="-m-1.5 p-1.5">
+				<span class="sr-only">Your Company</span>
+				<img
+					class="h-8 w-auto"
+					src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
+					alt=""
+				/>
+			</a>
+			<button
+				type="button"
+				id="mobile-menu-close"
+				class="-m-2.5 rounded-md p-2.5 text-gray-700">
+				<span class="sr-only">Close menu</span>
+				<svg
+					class="size-6"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+					stroke="currentColor"
+					aria-hidden="true"
+					data-slot="icon">
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M6 18 18 6M6 6l12 12"
+					></path>
+				</svg>
+			</button>
+		</div>
+		<div class="mt-6 flow-root">
+			<div class="-my-6 divide-y divide-gray-500/10">
+				<div class="space-y-2 py-6">
+					{
+						menuItems.map((item) =>
+							'href' in item ? (
+								<a
+									href={item.href}
+									class={`text-sm font-semibold text-gray-900 hover:text-blue-600 ${
+										item.disabled ? 'opacity-50 pointer-events-none' : ''
+									}`}>
+									{item.label}
+								</a>
+							) : (
+								<div class="space-y-1">
+									<button
+										type="button"
+										class="-mx-3 w-full flex items-center justify-between rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 mobile-dropdown-button"
+										data-mobile-dropdown={`mobile-dropdown-${item.label.toLowerCase()}`}>
+										{item.label}
+										<ChevronDownIcon />
+									</button>
+									<div
+										id={`mobile-dropdown-${item.label.toLowerCase()}`}
+										class="hidden">
+										{item.dropdown?.map((subItem) => (
+											<a
+												href={subItem.href}
+												class={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ${
+													subItem.disabled
+														? 'opacity-50 pointer-events-none'
+														: ''
+												}`}>
+												{subItem.label}
+											</a>
+										))}
+									</div>
 								</div>
-							</div>
-						</div>
-					) : (
-						<a
-							href={item.href}
-							class={`text-sm font-semibold text-gray-900 hover:text-blue-600 ${
-								item.disabled ? 'opacity-50 pointer-events-none' : ''
-							}`}>
-							{item.label}
-						</a>
-					),
-				)
-			}
+							),
+						)
+					}
+				</div>
+			</div>
 		</div>
-	</nav>
-</header>
+	</div>
+</div>
+
 <script>
-	const toggleMobileMenu = () => {
-		const mobileMenu = document.getElementById('mobile-menu')
-		if (mobileMenu) {
-			mobileMenu.classList.toggle('hidden')
-		}
+	// Mobile menu functionality
+	const mobileMenuButton = document.getElementById(
+		'mobile-menu-button',
+	) as HTMLButtonElement
+	const mobileMenuClose = document.getElementById(
+		'mobile-menu-close',
+	) as HTMLButtonElement
+	const mobileMenu = document.getElementById('mobile-menu') as HTMLDivElement
+	const mobileMenuBackdrop = document.getElementById(
+		'mobile-menu-backdrop',
+	) as HTMLDivElement
+
+	function openMobileMenu() {
+		mobileMenu.classList.remove('hidden')
+		mobileMenuBackdrop.classList.remove('hidden')
+		document.body.style.overflow = 'hidden'
 	}
 
-	const mobileMenuButton = document.getElementById('mobile-menu-button')
-	if (mobileMenuButton) {
-		mobileMenuButton.addEventListener('click', toggleMobileMenu)
+	function closeMobileMenu() {
+		mobileMenu.classList.add('hidden')
+		mobileMenuBackdrop.classList.add('hidden')
+		document.body.style.overflow = ''
 	}
 
-	const closeMobileMenuButton = document.getElementById(
-		'close-mobile-menu-button',
-	)
-	if (closeMobileMenuButton) {
-		closeMobileMenuButton.addEventListener('click', toggleMobileMenu)
-	}
+	mobileMenuButton.addEventListener('click', openMobileMenu)
+	mobileMenuClose.addEventListener('click', closeMobileMenu)
+	mobileMenuBackdrop.addEventListener('click', closeMobileMenu)
 
-	function toggleDropdown(label: string): void {
-		const dropdownMenu = document.getElementById(`dropdown-menu-${label}`)
-		if (!dropdownMenu) return
+	// Desktop dropdown menu functionality
+	const dropdownButtons = document.querySelectorAll('.dropdown-button')
+	const dropdownStates = new Map<string, boolean>()
 
-		const isHidden = dropdownMenu.classList.contains('hidden')
+	dropdownButtons.forEach((button) => {
+		const dropdownId = button.getAttribute('data-dropdown')
+		if (!dropdownId) return
 
-		// Close all dropdowns
-		document.querySelectorAll('[id^="dropdown-menu-"]').forEach((menu) => {
-			menu.classList.add('hidden')
-		})
+		dropdownStates.set(dropdownId, false)
 
-		// Toggle the clicked dropdown
-		if (isHidden) {
-			dropdownMenu.classList.remove('hidden')
-		}
-	}
+		button.addEventListener('click', () => {
+			const dropdown = document.getElementById(dropdownId)
+			if (!dropdown) return
 
-	// Attach event listeners to dropdown buttons
-	document.addEventListener('DOMContentLoaded', () => {
-		const dropdownButtons = document.querySelectorAll('.dropdown-button')
-		dropdownButtons.forEach((button) => {
-			button.addEventListener('click', (event) => {
-				event.stopPropagation() // Prevent the click from propagating to the document
-				const label = (button as HTMLElement).getAttribute('data-label')
-				if (label) {
-					toggleDropdown(label)
-				}
-			})
+			const isOpen = !dropdownStates.get(dropdownId)
+			dropdownStates.set(dropdownId, isOpen)
+
+			if (isOpen) {
+				dropdown.classList.remove('hidden')
+				// Close other dropdowns
+				dropdownButtons.forEach((otherButton) => {
+					const otherId = otherButton.getAttribute('data-dropdown')
+					if (otherId && otherId !== dropdownId) {
+						const otherDropdown = document.getElementById(otherId)
+						if (otherDropdown) {
+							otherDropdown.classList.add('hidden')
+							dropdownStates.set(otherId, false)
+						}
+					}
+				})
+			} else {
+				dropdown.classList.add('hidden')
+			}
 		})
 	})
 
-	// Close dropdown when clicking outside
-	document.addEventListener('click', () => {
-		document.querySelectorAll('[id^="dropdown-menu-"]').forEach((menu) => {
-			menu.classList.add('hidden')
+	// Mobile dropdown menu functionality
+	const mobileDropdownButtons = document.querySelectorAll(
+		'.mobile-dropdown-button',
+	)
+	const mobileDropdownStates = new Map<string, boolean>()
+
+	mobileDropdownButtons.forEach((button) => {
+		const dropdownId = button.getAttribute('data-mobile-dropdown')
+		if (!dropdownId) return
+
+		mobileDropdownStates.set(dropdownId, false)
+
+		button.addEventListener('click', () => {
+			const dropdown = document.getElementById(dropdownId)
+			const arrow = button.querySelector('svg')
+			if (!dropdown || !arrow) return
+
+			const isOpen = !mobileDropdownStates.get(dropdownId)
+			mobileDropdownStates.set(dropdownId, isOpen)
+
+			if (isOpen) {
+				dropdown.classList.remove('hidden')
+				arrow.style.transform = 'rotate(180deg)'
+			} else {
+				dropdown.classList.add('hidden')
+				arrow.style.transform = 'rotate(0)'
+			}
 		})
+	})
+
+	// Close desktop dropdowns when clicking outside
+	document.addEventListener('click', (event) => {
+		const target = event.target as Node
+		dropdownButtons.forEach((button) => {
+			const dropdownId = button.getAttribute('data-dropdown')
+			if (!dropdownId) return
+
+			const dropdown = document.getElementById(dropdownId)
+			if (!dropdown) return
+
+			if (!button.contains(target) && !dropdown.contains(target)) {
+				dropdown.classList.add('hidden')
+				dropdownStates.set(dropdownId, false)
+			}
+		})
+	})
+
+	// Close dropdowns when pressing Escape
+	document.addEventListener('keydown', (event) => {
+		if (event.key === 'Escape') {
+			closeMobileMenu()
+
+			// Close desktop dropdowns
+			dropdownButtons.forEach((button) => {
+				const dropdownId = button.getAttribute('data-dropdown')
+				if (!dropdownId) return
+
+				const dropdown = document.getElementById(dropdownId)
+				if (!dropdown) return
+
+				dropdown.classList.add('hidden')
+				dropdownStates.set(dropdownId, false)
+			})
+
+			// Close mobile dropdowns
+			mobileDropdownButtons.forEach((button) => {
+				const dropdownId = button.getAttribute('data-mobile-dropdown')
+				if (!dropdownId) return
+
+				const dropdown = document.getElementById(dropdownId)
+				const arrow = button.querySelector('svg')
+				if (!dropdown || !arrow) return
+
+				dropdown.classList.add('hidden')
+				arrow.style.transform = 'rotate(0)'
+				mobileDropdownStates.set(dropdownId, false)
+			})
+		}
 	})
 
 	// Array of base pages to check

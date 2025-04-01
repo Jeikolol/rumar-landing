@@ -1,16 +1,12 @@
 // @ts-check
 import { defineConfig } from 'astro/config'
 
-import tailwindcss from '@tailwindcss/vite'
-import react from '@astrojs/react'
 import vercel from '@astrojs/vercel'
+import tailwindIntegration from '@astrojs/tailwind'
 
 // https://astro.build/config
 export default defineConfig({
-	integrations: [react()],
-	vite: {
-		plugins: [tailwindcss()],
-	},
+	integrations: [tailwindIntegration()],
 	output: 'static', // Change to 'static' if you're using static deployment
 	adapter: vercel(), // Use 'vercel/static' for static sites
 })
