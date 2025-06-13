@@ -11,7 +11,9 @@ export default {
 		extend: {
 			colors: {
 				gold: {
-					500: '#D4AF37', // Gold color
+					300: '#FFE066',
+					500: '#D4AF37',
+					700: '#B8860B',
 				},
 			},
 		},

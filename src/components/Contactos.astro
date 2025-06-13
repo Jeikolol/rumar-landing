@@ -8,42 +8,48 @@ import PhoneIcon from './icons/PhoneIcon.astro'
 <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 p-8">
 	<div class="space-y-8">
 		<div>
-			<h1 class="text-4xl font-bold text-gray-900 mb-4">Contáctanos</h1>
+			<h1 class="text-4xl font-bold text-gold-500 mb-4">Contáctanos</h1>
 			<!-- <p class="text-lg text-gray-600">
 				Let's talk about your project and how we can help you succeed.
 			</p> -->
 		</div>
 
 		<div class="space-y-6">
-			<div class="flex items-center space-x-4 text-gray-700">
-				<LocationIcon class="h-6 w-6 text-indigo-600" />
-				<span>Plaza Las Palmas 2do nivel - Local 206</span>
+			<div class="flex items-center space-x-4 text-gold-500">
+				<LocationIcon class="h-6 w-6 text-gold-500" />
+				<span class="text-gold-300"
+					>Av. Las Palmas, esq, C. San Miguel 81, Santo Domingo Oeste - Local
+					206, segundo nivel</span
+				>
 			</div>
-			<div class="flex items-center space-x-4 text-gray-700">
-				<PhoneIcon class="h-6 w-6 text-indigo-600" />
-				<span>(809) 585-0568</span>
-			</div>
-
-			<div class="flex items-center space-x-4 text-gray-700">
-				<ClockIcon class="h-6 w-6 text-indigo-600" />
-				<span>Lun-Vie 8:00AM - 6:00PM</span>
+			<div class="flex items-center space-x-4 text-gold-500">
+				<PhoneIcon class="h-6 w-6 text-gold-500" />
+				<span class="text-gold-300">(809) 585-0568</span>
 			</div>
 
-			<div class="flex items-center space-x-4 text-gray-700">
-				<EmailIcon class="h-6 w-6 text-indigo-600" />
-				<span>info@rumarcredito.com</span>
+			<div class="flex items-center space-x-4 text-gold-500">
+				<ClockIcon class="h-6 w-6 text-gold-500" />
+				<span class="text-gold-300"
+					>Lun-Vie 9:00AM - 6:00PM / Sab 9:00AM - 1:00PM</span
+				>
+			</div>
+
+			<div class="flex items-center space-x-4 text-gold-500">
+				<EmailIcon class="h-6 w-6 text-gold-500" />
+				<span class="text-gold-300">info@rumarcredito.com</span>
 			</div>
 		</div>
 	</div>
 
 	<form
+		method="post"
 		id="contact-form"
-		class="bg-white rounded-2xl shadow-lg p-8">
+		class="bg-black/80 rounded-2xl shadow-lg p-8 border border-gold-500">
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
 			<div>
 				<label
 					for="firstName"
-					class="block text-sm font-medium text-gray-700 mb-2"
+					class="block text-sm font-medium text-gold-500 mb-2"
 					>Nombre(s)</label
 				>
 				<input
@@ -51,13 +57,13 @@ import PhoneIcon from './icons/PhoneIcon.astro'
 					id="firstName"
 					name="firstName"
 					required
-					class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+					class="w-full bg-black px-4 py-2 border border-gold-500 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-gold-500"
 				/>
 			</div>
 			<div>
 				<label
 					for="lastName"
-					class="block text-sm font-medium text-gray-700 mb-2"
+					class="block text-sm font-medium text-gold-500 mb-2"
 					>Apellido(s)</label
 				>
 				<input
@@ -65,7 +71,7 @@ import PhoneIcon from './icons/PhoneIcon.astro'
 					id="lastName"
 					name="lastName"
 					required
-					class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+					class="w-full bg-black px-4 py-2 border border-gold-500 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-gold-500"
 				/>
 			</div>
 		</div>
@@ -73,7 +79,7 @@ import PhoneIcon from './icons/PhoneIcon.astro'
 		<div class="mb-6">
 			<label
 				for="email"
-				class="block text-sm font-medium text-gray-700 mb-2"
+				class="block text-sm font-medium text-gold-500 mb-2"
 				>Correo</label
 			>
 			<input
@@ -81,14 +87,14 @@ import PhoneIcon from './icons/PhoneIcon.astro'
 				id="email"
 				name="email"
 				required
-				class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+				class="w-full bg-black px-4 py-2 border border-gold-500 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-gold-500"
 			/>
 		</div>
 
 		<div class="mb-6">
 			<label
 				for="phone"
-				class="block text-sm font-medium text-gray-700 mb-2"
+				class="block text-sm font-medium text-gold-500 mb-2"
 				>Teléfono</label
 			>
 			<input
@@ -96,14 +102,14 @@ import PhoneIcon from './icons/PhoneIcon.astro'
 				id="phone"
 				name="phone"
 				required
-				class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+				class="w-full bg-black px-4 py-2 border border-gold-500 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-gold-500"
 			/>
 		</div>
 
 		<div class="mb-6">
 			<label
 				for="message"
-				class="block text-sm font-medium text-gray-700 mb-2"
+				class="block text-sm font-medium text-gold-500 mb-2"
 				>Mensaje</label
 			>
 			<textarea
@@ -111,14 +117,48 @@ import PhoneIcon from './icons/PhoneIcon.astro'
 				name="message"
 				rows="4"
 				required
-				class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+				class="w-full bg-black px-4 py-2 border border-gold-500 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-gold-500"
 			></textarea>
 		</div>
 
 		<button
 			type="submit"
-			class="w-full bg-indigo-600 text-white py-3 px-6 rounded-lg hover:bg-indigo-700 transition duration-200">
+			class="w-full bg-gold-500 text-black py-3 px-6 rounded-lg hover:bg-gold-700 transition duration-200">
 			Enviar mensaje
 		</button>
 	</form>
 </div>
+<script type="module" is:inline>
+	const form = document.querySelector('#contact-form')
+
+	form?.addEventListener('submit', async (e) => {
+		e.preventDefault()
+
+		const formData = new FormData(form)
+		const payload = {
+			firstName: formData.get('firstName'),
+			lastName: formData.get('lastName'),
+			email: formData.get('email'),
+			phone: formData.get('phone'),
+			message: formData.get('message'),
+		}
+
+		try {
+			const res = await fetch('/api/send-email', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(payload),
+			})
+
+			const result = await res.json()
+
+			if (res.ok) {
+				form.reset()
+			} else {
+				alert(`Error: ${result.message}`)
+			}
+		} catch (err) {
+			console.error(err)
+		}
+	})
+</script>

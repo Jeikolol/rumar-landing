@@ -1,14 +1,22 @@
+---
+import Image from 'astro/components/Image.astro'
+---
+
 <div
-	class="max-w-4xl mx-auto bg-black text-white rounded-lg shadow-lg p-8 md:p-12">
-	<div class="text-center">
-		<h1 class="text-4xl font-bold text-gold-500 mb-6">RUMAR CRÉDITO</h1>
-		<p class="text-lg font-semibold text-gold-500">GET LOAN FASTER</p>
+	class="max-w-4xl mx-auto bg-black/80 rounded-lg shadow-lg p-8 md:p-12 border border-gold-500">
+	<div class="flex justify-center">
+		<Image
+			src="/logo2.png"
+			alt="Logo"
+			height={350}
+			width={350}
+		/>
 	</div>
 
 	<div class="mt-12 space-y-8">
 		<div>
-			<h2 class="text-2xl font-bold text-gold-500">Misión</h2>
-			<p class="mt-2 text-gray-300">
+			<h2 class="text-2xl font-bold text-gold-700">Misión</h2>
+			<p class="mt-2 text-gold-300">
 				Satisfacer las necesidades de los clientes con convicción, ofreciendo
 				productos y servicios financieros de alta calidad, con la ayuda de un
 				equipo dedicado que ofrece un asesoramiento personalizado, flexible y
@@ -17,8 +25,8 @@
 		</div>
 
 		<div>
-			<h2 class="text-2xl font-bold text-gold-500">Visión</h2>
-			<p class="mt-2 text-gray-300">
+			<h2 class="text-2xl font-bold text-gold-700">Visión</h2>
+			<p class="mt-2 text-gold-300">
 				Ser la institución financiera líder en el sector, posicionándonos como
 				la mejor opción para los clientes, logrando su lealtad brindando
 				productos y servicios de calidad que contribuyan al desarrollo económico
@@ -27,29 +35,30 @@
 		</div>
 
 		<div>
-			<h2 class="text-2xl font-bold text-gold-500">Valores</h2>
-			<ul class="mt-2 space-y-2 text-gray-300">
+			<h2 class="text-2xl font-bold text-gold-700">Valores</h2>
+			<ul class="mt-2 space-y-2 text-gold-300">
 				<li>
-					<strong>Honestidad:</strong> Realizamos nuestro trabajo con transparencia,
-					lealtad e integridad.
+					<strong class="text-gold-500">Honestidad:</strong> Realizamos nuestro trabajo
+					con transparencia, lealtad e integridad.
 				</li>
 				<li>
-					<strong>Orientado al cliente:</strong> Satisfacemos las necesidades de
-					nuestros clientes mediante un asesoramiento profesional y responsable.
+					<strong class="text-gold-500">Orientado al cliente:</strong> Satisfacemos
+					las necesidades de nuestros clientes mediante un asesoramiento profesional
+					y responsable.
 				</li>
 				<li>
-					<strong>Respeto:</strong> Aseguramos un trato justo a nuestros clientes
-					y socios.
+					<strong class="text-gold-500">Respeto:</strong> Aseguramos un trato justo
+					a nuestros clientes y socios.
 				</li>
 				<li>
-					<strong>Compromiso:</strong> Estamos orientados al cumplimiento de nuestras
-					metas y objetivos, a través del desarrollo y fortalecimiento de las habilidades
-					de nuestros colaboradores.
+					<strong class="text-gold-500">Compromiso:</strong> Estamos orientados al
+					cumplimiento de nuestras metas y objetivos, a través del desarrollo y fortalecimiento
+					de las habilidades de nuestros colaboradores.
 				</li>
 				<li>
-					<strong>Trabajo en equipo:</strong> Promovemos una cultura de beneficio
-					mutuo entre nuestros empleados a través de una relación profesional enfocada
-					al éxito.
+					<strong class="text-gold-500">Trabajo en equipo:</strong> Promovemos una
+					cultura de beneficio mutuo entre nuestros empleados a través de una relación
+					profesional enfocada al éxito.
 				</li>
 			</ul>
 		</div>

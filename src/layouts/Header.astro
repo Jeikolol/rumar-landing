@@ -38,27 +38,27 @@ const menuItems: MenuItem[] = [
 ---
 
 <div class="fixed inset-x-0 top-0 z-50 mx-4 mt-4">
-	<header class="bg-white/80 backdrop-blur-md shadow-md rounded-full">
+	<header class="bg-black/40 backdrop-blur-2xl shadow-md rounded-full">
 		<nav
-			class="flex items-center justify-between p-4 lg:px-8"
+			class="flex items-center justify-between p-6 lg:px-8"
 			aria-label="Global">
 			<!-- Logo -->
-			<div class="flex lg:flex-1">
+			<div class="flex items-center lg:flex-1">
 				<a
 					href="/"
 					class="-m-1.5 p-1.5">
 					<span class="sr-only">Your Company</span>
 					<Image
-						src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
+						src="/logo.png"
 						alt="Logo"
-						height={32}
-						width={32}
+						height={100}
+						width={150}
 					/>
 				</a>
 			</div>
 
 			<!-- Mobile menu button -->
-			<div class="flex lg:hidden">
+			<div class="flex items-center space-x-12 lg:hidden">
 				<button
 					type="button"
 					id="mobile-menu-button"
@@ -88,7 +88,7 @@ const menuItems: MenuItem[] = [
 						'href' in item ? (
 							<a
 								href={item.href}
-								class={`text-sm font-semibold text-gray-900 hover:text-blue-600 ${
+								class={`text-sm font-semibold text-gold-500 hover:text-gold-300 ${
 									item.disabled ? 'opacity-50 pointer-events-none' : ''
 								}`}>
 								{item.label}
@@ -97,14 +97,14 @@ const menuItems: MenuItem[] = [
 							<div class="relative">
 								<button
 									type="button"
-									class="text-sm font-semibold text-gray-900 flex items-center dropdown-button"
+									class="text-sm font-semibold text-gold-500 flex items-center dropdown-button"
 									data-dropdown={`dropdown-${item.label.toLowerCase()}`}>
 									{item.label}
 									<ChevronDownIcon />
 								</button>
 								<div
 									id={`dropdown-${item.label.toLowerCase()}`}
-									class="hidden absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white ring-1 shadow-lg ring-black/5"
+									class="hidden absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-black/80 border border-gold-500 ring-1 shadow-lg ring-black/5"
 									role="menu"
 									aria-orientation="vertical"
 									tabindex="-1">
@@ -114,7 +114,7 @@ const menuItems: MenuItem[] = [
 										{item.dropdown?.map((subItem) => (
 											<a
 												href={subItem.href}
-												class={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ${
+												class={`block px-4 py-2 text-sm text-gold-700 hover:bg-black-100 ${
 													subItem.disabled
 														? 'opacity-50 pointer-events-none'
 														: ''
@@ -182,7 +182,7 @@ const menuItems: MenuItem[] = [
 							'href' in item ? (
 								<a
 									href={item.href}
-									class={`text-sm font-semibold text-gray-900 hover:text-blue-600 ${
+									class={`text-sm font-semibold text-gray-900 hover:text-gold-300 ${
 										item.disabled ? 'opacity-50 pointer-events-none' : ''
 									}`}>
 									{item.label}

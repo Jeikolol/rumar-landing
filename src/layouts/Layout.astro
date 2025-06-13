@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css'
+import WhatsAppFloatingButton from '../components/WhatsAppFloatingButton.astro'
 ---
 
 <html lang="en">
@@ -11,8 +12,8 @@ import '../styles/global.css'
 		/>
 		<link
 			rel="icon"
-			type="image/svg+xml"
-			href="/favicon.svg"
+			type="image/x-icon"
+			href="/favicon.ico"
 		/>
 		<meta
 			name="generator"
@@ -20,7 +21,8 @@ import '../styles/global.css'
 		/>
 		<title>Rumar Crédito</title>
 	</head>
-	<body>
+	<body class="bg-black/40 text-gold-500">
+		<WhatsAppFloatingButton />
 		<slot />
 	</body>
 </html>
