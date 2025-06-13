@@ -15,6 +15,7 @@
 		"astro": "^5.5.4",
 		"autoprefixer": "^10.4.21",
 		"handlebars": "^4.7.8",
+		"lottie-web": "^5.13.0",
 		"nodemailer": "^7.0.3",
 		"postcss": "^8.5.3",
 		"tailwindcss": "^3.4.17"
