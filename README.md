@@ -1,36 +1,90 @@
-# rumar-landing
+# Rumar Crédito Landing Page
 
-# Astro Starter Kit: Basics
+A modern, responsive landing page for Rumar Crédito, featuring a gold-on-black theme, elegant typography, and a focus on financial services.
+
+[![Vercel](https://img.shields.io/badge/-Vercel-black?logo=vercel&logoColor=white&style=for-the-badge)](https://vercel.com)
+
+## Features
+
+- ✨ Elegant gold-on-black design
+- 📱 Fully responsive layout
+- 🖼️ Custom logo and favicon
+- 🧭 Smooth navigation with dropdown menus
+- 📄 Informative sections: About Us, Loans, Contact
+- 💡 Accessible and SEO-friendly
+
+## Tech Stack
+
+[![Astro](https://img.shields.io/badge/-Astro-1a1a1a?logo=astro&logoColor=F15A2C&style=for-the-badge)](https://astro.build)
+[![Tailwind CSS](https://img.shields.io/badge/-TailwindCSS-06B6D4?logo=tailwindcss&logoColor=white&style=for-the-badge)](https://tailwindcss.com)
+[![Figma](https://img.shields.io/badge/-Figma-A259FF?logo=figma&logoColor=white&style=for-the-badge)](https://figma.com)
+
+## Getting Started
+
+- Clone the repository:
 
 ```sh
-npm create astro@latest -- --template basics
+git clone https://github.com/Jeikolol/rumar-landing.git
+cd rumar-landing
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+- Install dependencies:
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+```sh
+npm install
+```
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+- Run the development server:
 
-## 🚀 Project Structure
+```sh
+npm run dev
+```
+
+- Open in your browser:
+
+```sh
+http://localhost:4321
+```
+
+## Customization
+
+- **Logo**: Replace `/public/logo.svg` and `favicon.ico` with your own branding.
+- **Colors**: Adjust gold shades in `tailwind.config.js` if needed.
+- **Content**: Edit sections in `components` and `pages` to update text and images
+
+## 🚀 Folder Structure
 
 Inside of your Astro project, you'll see the following folders and files:
 
 ```text
 /
 ├── public/
-│   └── favicon.svg
+│   ├── favicon.svg
+│   └── logo.svg
 ├── src/
+│   ├── components
+│   │   ├── Header.astro
+│   │   ├── Nosotros.astro
 │   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
+│   │    └── Layout.astro
+│   ├── pages/
+│   │    └── index.astro
+│   └── tailwind.config.js
 └── package.json
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Deployment
+
+You can deploy this site to Vercel, Netlify, or any static hosting provider.
+
+## License
+
+MIT
+
+## Credits
+
+- Logo and design by Rumar Crédito
+- Built with [![Astro](https://img.shields.io/badge/-Astro-1a1a1a?logo=astro&logoColor=F15A2C&style=for-the-badge)](https://astro.build) and [![Tailwind CSS](https://img.shields.io/badge/-TailwindCSS-06B6D4?logo=tailwindcss&logoColor=white&style=for-the-badge)](https://tailwindcss.com)
 
 ## 🧞 Commands
 
@@ -44,7 +98,3 @@ All commands are run from the root of the project, from a terminal:
 | `npm run preview`         | Preview your build locally, before deploying     |
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
